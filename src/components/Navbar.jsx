@@ -11,7 +11,7 @@ const Navbar = () => {
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
             <h2 className="fw-bold px-3 text-light">
-              <span className="same-color">Dorc</span>-play
+              <span className="same-color">Dorc</span><span>-play</span>
             </h2>
           </a>
           <div className="d-md-block d-none">
@@ -175,19 +175,19 @@ const Navbar = () => {
               <div className="mt-top d-md-flex">
                 <div>
                   <h1
-                    className="h1-font mt-5 col-md-8"
+                    className="h1-font mt-5 col-md-8 col-10"
                     style={{ color: "#fd4414" }}
                   >
                     Immerse Yourself in Musical Bliss
                   </h1>
-                  <h3 className="mt-5" style={{ color: "#fd4414" }}>
+                  <h3 className="mt-5 mb-5" style={{ color: "#fd4414" }}>
                     Unleash your musical potential with Doc-Pay's seamless
                     payments.
                   </h3>
                 </div>
                 <img
                   style={{ borderRadius: "10px" }}
-                  className="col-12 side-img mt-md-5 mt-5 col-md-5"
+                  className="col-10  side-img mt-md-5 mt-5 py-2 col-md-5"
                   src={images}
                   alt=""
                 />

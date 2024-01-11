@@ -198,19 +198,19 @@ const Navbar = () => {
       </section>
 
       <section>
-        <div className="container mt-5">
+        <div className="container mt-md-5">
           <div className="row">
             <div className="col-sm-12 box-shadow-ful">
               <div className="text-light d-flex justify-content-between fs-2 py-3 px-2 bg-black fw-bolder">
                 <div>
-                  <span className="bi same-color bi-graph-up-arrow fw-bolder "></span>{" "}
-                  Trending Songs |{" "}
+                  <span className="bi same-color bi-graph-up-arrow fw-bolder "></span>
+                  Trending Songs 
                   <span className="same-color font-10">
                     Submit to Trending & Playlists
                   </span>
                 </div>
                 <button className="btn text-light same-bg col-md-1 col-5 fw-bold px-3 fs-5">
-                  Upload{" "}
+                  Upload
                 </button>
               </div>
              <Home/>

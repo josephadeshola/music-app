@@ -47,11 +47,7 @@ body {
   font-weight: 700;
   font-size: 50px !important;
 }
-.side-img {
-  position: relative;
-  bottom: 50px;
-  height: 50vh;
-}
+
 .music-img {
   height: 30vh;
   box-shadow: 0 3px 8px 0px #393838;
@@ -106,6 +102,40 @@ body {
   border-radius: 50%;
   border: 8px solid #fff;
   box-shadow: 0 5px 5px rgb(225, 26, 26, 0.22);
+}
+.side-img {
+  height: 400px !important;
+  width: 400px;
+  margin: auto;
+  background-image: url(https://img.freepik.com/premium-photo/candid-shot-excited-young-african-man-party-with-headphones-beautiful-generative-ai-aig32_31965-210599.jpg?w=740);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  align-items: center;
+  text-align: center;
+  background-color: #ed360d;
+  border-radius: 400px !important;
+}
+.img-border {
+  height: 460px;
+  width: 550px;
+  align-items: center;
+  text-align: center;
+  border-radius: 400px;
+  background-color: #333;
+  animation: img-border 5s infinite alternate;
+}
+
+@keyframes img-border {
+  0% {
+    background: linear-gradient(to right, #ff7300, #00c3ff, #ff006a);
+  }
+  50% {
+    background: linear-gradient(to right, #ff6600, #ffee00, #7bff00);
+  }
+  100% {
+    background: linear-gradient(to right, #ff0077, #00ff9d, #00ccff);
+  }
 }
 
 @media (max-width: 600px) {
@@ -163,5 +193,30 @@ body {
   .sm-width {
     width: 345px !important;
     padding: 40px !important;
+  }
+  .side-img {
+    height: 150px !important;
+    width: 150px;
+    align-self: center;
+    align-items: center;
+    background-image: url(https://img.freepik.com/premium-photo/candid-shot-excited-young-african-man-party-with-headphones-beautiful-generative-ai-aig32_31965-210599.jpg?w=740);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    align-items: center;
+    text-align: center;
+    background-color: #ed360d;
+    border-radius: 400px !important;
+  }
+  .img-border {
+    padding-top: 4px;
+    margin: auto;
+    height: 190px;
+    width: 190px;
+    align-items: center;
+    text-align: center;
+    border-radius: 400px;
+    background-color: #333;
+    animation: img-border 5s infinite alternate;
   }
 }

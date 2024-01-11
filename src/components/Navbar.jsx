@@ -1,17 +1,16 @@
 import React from "react";
 import "./style.css";
-import images from "../assets/young-hipster-man-listening-music-with-headphones-black-studio-with-neon-lights_155003-20397-removebg-preview.png";
-import images1 from '../assets/headphones-african-american-woman-s-portrait-isolated-blue-studio-background-multicolored-neon-light-beautiful-female-model-concept-human-emotions-facial-expression-sales-ad-fashion_155003.png'
 import Home from "./Home";
 
 const Navbar = () => {
   return (
     <>
-      <nav className="navbar bg-dark px-md-5  fixed-top">
+      <nav className="navbar shadow bg-dark px-md-5 py-md-1 py-3  fixed-top">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
             <h2 className="fw-bold px-3 text-light">
-              <span className="same-color">Dorc</span><span>-play</span>
+              <span className="same-color">Drc</span>
+              <span>-play</span>
             </h2>
           </a>
           <div className="d-md-block d-none">
@@ -52,7 +51,7 @@ const Navbar = () => {
           </div>
           <span
             className="navbar-toggler-icon text-light rounded"
-            style={{ backgroundColor: "#fd4414"}}
+            style={{ backgroundColor: "#fd4414" }}
             type="button"
             data-bs-target="#offcanvasNavbar"
             aria-controls="offcanvasNavbar"
@@ -180,17 +179,14 @@ const Navbar = () => {
                   >
                     Immerse Yourself in Musical Bliss
                   </h1>
-                  <h3 className="mt-5 mb-5" style={{ color: "#fd4414" }}>
+                  <h3 className="mt-5 mb-5 col-9" style={{ color: "#fd4414" }}>
                     Unleash your musical potential with Doc-Pay's seamless
                     payments.
                   </h3>
                 </div>
-                <img
-                  style={{ borderRadius: "10px" }}
-                  className="col-10  side-img mt-md-5 mt-5 py-2 col-md-5"
-                  src={images}
-                  alt=""
-                />
+                <div className="img-border">
+                  <div className="mt-4  side-img"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -204,7 +200,7 @@ const Navbar = () => {
               <div className="text-light d-flex justify-content-between fs-2 py-3 px-2 bg-black fw-bolder">
                 <div>
                   <span className="bi same-color bi-graph-up-arrow fw-bolder "></span>
-                  Trending Songs 
+                  Trending Songs
                   <span className="same-color font-10">
                     Submit to Trending & Playlists
                   </span>
@@ -213,7 +209,7 @@ const Navbar = () => {
                   Upload
                 </button>
               </div>
-             <Home/>
+              <Home />
             </div>
           </div>
         </div>

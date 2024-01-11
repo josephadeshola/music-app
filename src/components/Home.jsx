@@ -30,7 +30,7 @@ const Home = () => {
           {apidata &&
             apidata.map((eachData) => (
               <>
-                <div class="shadow col-md-10 col-12 mx-auto py-3 mb-4">
+                <div class="shadow-color col-md-10 col-12 mx-auto py-3 mb-4">
                   <div class="music-container  mx-auto  py-2 text-center">
                     <img
                       className="col-4"
@@ -39,12 +39,16 @@ const Home = () => {
                       alt=""
                     />
                   </div>
-                  <h5 class="artist-name mt-5 text-center text-light">SONG</h5>
                   {/* <audio
                     id="audio-player-${index}"
                     src="${eachSong.audio}"
                   ></audio> */}
-                  <h5 class="song-name text-center text-light fw-bold">NEW DANCER</h5>
+                  <div className="mt-3">
+                  <b class="artist-name mt-5 text-center text-light">{eachData.artistName}</b><br />
+                  <h5 class="song-name text-center text-light fw-bold">{eachData.albumName}</h5>
+                  <h4><b style={{color:"#fd4414"}}>({eachData.songTitle})</b></h4>
+
+                  </div>
                   <span class="fs-5 mt-4 d-flex px-4 justify-content-between">
                     <div class="text-light bi-heart"></div>
                     <div class="text-light bi-card-checklist"></div>

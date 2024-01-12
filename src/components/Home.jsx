@@ -45,7 +45,7 @@ const Home = () => {
                     src={eachData.songUrl}
                     className="audio-element"
                   ></audio>
-                  <div className="mt-3 px-5 px-md-0">
+                  <div className="mt-3 ">
                     <b class="artist-name mt-5 text-center text-light">
                       {eachData.artistName}
                     </b>

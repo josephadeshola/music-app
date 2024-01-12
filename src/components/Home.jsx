@@ -63,16 +63,16 @@ const Home = () => {
   return (
     <div>
       <div className="mt-3 col-12 ">
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <input
             type="text"
             placeholder="Search for a song..."
             // value={searchQuery}
             // onChange={(e) => handleSearch(e.target.value)}
           />
-        </div>
+        </div> */}
         <div id="displaySong" className="col-12 text-center getflex col-md-12">
-          {apidata &&
+          {apidata && (
             apidata.map((eachData, index) => (
               <>
                 <div class="shadow-color col-md-10 col-12 mx-auto py-4 mb-4">
@@ -247,28 +247,9 @@ const Home = () => {
                     </span>
                   </div> */}
               </>
-            ))}
+            )))}
         </div>
       </div>
-
-      {/* <div className="container">
-        <div className="row">
-          <div className='content-item'>
-            <div className='music-content'>
-              <img src="" alt="" />
-            </div>
-            <div className='music-content'>
-              <img src="" alt="" />
-            </div>
-            <div className='music-content'>
-              <img src="" alt="" />
-            </div>
-            <div className='music-content'>
-              <img src="" alt="" />
-            </div>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };

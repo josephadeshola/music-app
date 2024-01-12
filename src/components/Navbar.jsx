@@ -31,8 +31,17 @@ const Navbar = () => {
               </div>
             </form>
           </div>
+          <span
+            className="navbar-toggler-icon text-light rounded"
+            style={{ backgroundColor: "#fd4414" }}
+            type="button"
+            data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar"
+            aria-label="Toggle navigation"
+            data-bs-toggle="offcanvas"
+          ></span>
           <div className="d-md-none d-block">
-            <form className="d-flex sharch-sm offset-md-2" role="search">
+            <form className="d-flex sharch-sm offset-md-2 " role="search">
               <input
                 className="form-control width-50 me-2"
                 type="search"
@@ -49,15 +58,7 @@ const Navbar = () => {
               </div>
             </form>
           </div>
-          <span
-            className="navbar-toggler-icon text-light rounded"
-            style={{ backgroundColor: "#fd4414" }}
-            type="button"
-            data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar"
-            aria-label="Toggle navigation"
-            data-bs-toggle="offcanvas"
-          ></span>
+         
           <div
             className="offcanvas offcanvas-end"
             tabIndex="-1"
@@ -137,7 +138,7 @@ const Navbar = () => {
                     Recently Added
                   </a>
                 </li>
-                <h5 class="fw-bold px-3 mt-2 text-light">MY LIBRARY</h5>
+                <h5 class="fw-bold px-3 mt-2 text-danger">MY LIBRARY</h5>
                 <li class="nav-item">
                   <a
                     class="nav-link bi bi-person-lines-fill fw-bold px-3 fs-5 mt-3 mt-3 fs-5"
@@ -180,7 +181,7 @@ const Navbar = () => {
                     Immerse Yourself in Musical Bliss
                   </h1>
                   <h3 className="mt-5 mb-5 col-9" style={{ color: "#fd4414" }}>
-                    Unleash your musical potential with Doc-Pay's seamless
+                    Unleash your musical potential with Drc-Paly's seamless
                     payments.
                   </h3>
                 </div>
@@ -194,18 +195,18 @@ const Navbar = () => {
       </section>
 
       <section>
-        <div className="container mt-md-5">
+        <div className="container mt-md-5 mt-3">
           <div className="row">
             <div className="col-sm-12 box-shadow-ful">
               <div className="text-light d-flex justify-content-between fs-2 py-3 px-2 bg-black fw-bolder">
                 <div>
                   <span className="bi same-color bi-graph-up-arrow fw-bolder "></span>
-                  Trending Songs
+                  <small className="fs-4 ms-1">Trending Songs</small>
                   <span className="same-color font-10">
                     Submit to Trending & Playlists
                   </span>
                 </div>
-                <button className="btn text-light same-bg col-md-1 col-5 fw-bold px-3 fs-5">
+                <button className="btn text-light same-bg col-md-2 col-1 col-5 fw-bold px-3 fs-5">
                   Upload
                 </button>
               </div>

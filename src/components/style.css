@@ -25,7 +25,7 @@ body {
 }
 .offcanvas {
   background: #1b1a1a;
-  width: 20% !important;
+  width: 25% !important;
 }
 .nav-item a {
   color: #fff;
@@ -55,10 +55,12 @@ body {
 }
 
 .sharch-sm {
-  position: relative !important;
-  top: 100px !important;
+  margin-left: 100px;
+  /* position: relative !important; */
+  /* top: 100px !important; */
 }
 .same-color {
+  font-size: 23px;
   color: #ed360d;
 }
 .same-bg {

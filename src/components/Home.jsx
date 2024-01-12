@@ -5,7 +5,8 @@ import images1 from "../assets/headphones-african-american-woman-s-portrait-isol
 const Home = () => {
   const [apidata, setData] = useState(null);
   // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
+  const [playVisible, setPlayVisible] = useState(true);
+  const [pauseVisible, setPauseVisible] = useState(false);
   const fetchData = () => {
     let endPoint = "https://robo-music-api.onrender.com/music/my-api";
     axios
@@ -28,9 +29,9 @@ const Home = () => {
       <div className="mt-3 col-12 ">
         <div id="displaySong" className="col-12 text-center getflex col-md-12">
           {apidata &&
-            apidata.map((eachData) => (
+            apidata.map((eachData, index) => (
               <>
-                <div class="shadow-color col-md-10 col-12 mx-auto py-3 mb-4">
+                <div class="shadow-color col-md-10 col-12 mx-auto py-4 mb-4">
                   <div class="music-container  mx-auto  py-2 text-center">
                     <img
                       className="col-4"
@@ -39,15 +40,22 @@ const Home = () => {
                       alt=""
                     />
                   </div>
-                  {/* <audio
-                    id="audio-player-${index}"
-                    src="${eachSong.audio}"
-                  ></audio> */}
+                  <audio
+                    id={`audio-player-${index}`}
+                    src={eachData.songUrl}
+                    className="audio-element"
+                  ></audio>
                   <div className="mt-3">
-                  <b class="artist-name mt-5 text-center text-light">{eachData.artistName}</b><br />
-                  <h5 class="song-name text-center text-light fw-bold">{eachData.albumName}</h5>
-                  <h4><b style={{color:"#fd4414"}}>({eachData.songTitle})</b></h4>
-
+                    <b class="artist-name mt-5 text-center text-light">
+                      {eachData.artistName}
+                    </b>
+                    <br />
+                    <h5 class="song-name text-center text-light fw-bold">
+                      {eachData.albumName}
+                    </h5>
+                    <h4>
+                      <b style={{ color: "#fd4414" }}>({eachData.songTitle})</b>
+                    </h4>
                   </div>
                   <span class="fs-5 mt-4 d-flex px-4 justify-content-between">
                     <div class="text-light bi-heart"></div>
@@ -65,14 +73,37 @@ const Home = () => {
                   </div>
                   <span class="d-flex px-5 mt-3 justify-content-around">
                     <div class="text-light bi bi-skip-backward-fill fs-1"></div>
-                    <div
-                      class="text-light bi bi-play-circle fs-1"
-                      id="play-btn-${index}"
-                    ></div>
-                    <div
-                      class="text-light bi bi-pause-circle fs-1"
-                      id="pause-btn-${index}"
-                    ></div>
+
+                    <div className="border col-4 rounded d-flex mx-auto">
+                      <div
+                        style={{ cursor: "pointer" }}
+                        className={`text-light bi position-relative text-center mx-auto bi-play-circle fs-1 ${
+                          playVisible ? "visible" : "invisible"
+                        }`}
+                        onClick={() => {
+                          const audio = document.getElementById(
+                            `audio-player-${index}`
+                          );
+                          audio.play();
+                          setPlayVisible(false);
+                          setPauseVisible(true);
+                        }}
+                      ></div>
+                      <div
+                        className={`text-light bi ms-2 position-absolute text-center mx-auto  bi-pause-circle fs-1 ${
+                          pauseVisible ? "visible" : "invisible"
+                        }`}
+                        onClick={() => {
+                          const audio = document.getElementById(
+                            `audio-player-${index}`
+                          );
+                          audio.pause();
+                          setPlayVisible(true);
+                          setPauseVisible(false);
+                        }}
+                      ></div>
+                    </div>
+
                     <div class="text-light bi bi-fast-forward-fill fs-1"></div>
                   </span>
                 </div>

@@ -66,6 +66,7 @@ body {
 }
 .same-color {
   font-size: 23px;
+  font-weight: 900 !important;
   color: #ed360d;
 }
 .same-bg {

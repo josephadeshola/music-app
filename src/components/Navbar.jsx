@@ -197,8 +197,8 @@ const Navbar = () => {
       <section>
         <div className="container mt-md-5 mt-3">
           <div className="row">
-            <div className="col-sm-12 box-shadow-ful">
-              <div className="text-light d-flex justify-content-between fs-2 py-3 px-2 bg-black fw-bolder">
+            <div className="col-sm-12 rounded box-shadow-ful">
+              <div className="text-light d-flex rounded justify-content-between fs-2 py-2 px-2 bg-black fw-bolder">
                 <div>
                   <span className="bi same-color bi-graph-up-arrow fw-bolder "></span>
                   <small className="fs-4 ms-1">Trending Songs</small>

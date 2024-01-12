@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./home.css";
-import images1 from "../assets/headphones-african-american-woman-s-portrait-isolated-blue-studio-background-multicolored-neon-light-beautiful-female-model-concept-human-emotions-facial-expression-sales-ad-fashion_155003.png";
 const Home = () => {
   const [apidata, setData] = useState(null);
-  // const [loading, setLoading] = useState(true);
-  const [playVisible, setPlayVisible] = useState(true);
-  const [pauseVisible, setPauseVisible] = useState(false);
+  const [playbackState, setPlaybackState] = useState({});
+  const [progress, setProgress] = useState({});
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredData, setFilteredData] = useState(null);
+
   const fetchData = () => {
     let endPoint = "https://robo-music-api.onrender.com/music/my-api";
     axios
@@ -20,16 +21,59 @@ const Home = () => {
       });
   };
 
+  const handlePlayPause = (index) => {
+    const audio = document.getElementById(`audio-player-${index}`);
+    if (playbackState[index] === "playing") {
+      audio.pause();
+      setPlaybackState((prevState) => ({
+        ...prevState,
+        [index]: "paused",
+      }));
+    } else {
+      audio.play();
+      setPlaybackState((prevState) => ({
+        ...prevState,
+        [index]: "playing",
+      }));
+    }
+  };
+
+  const handleTimeUpdate = (index) => {
+    const audio = document.getElementById(`audio-player-${index}`);
+    const progressValue = (audio.currentTime / audio.duration) * 100;
+    setProgress((prevProgress) => ({
+      ...prevProgress,
+      [index]: progressValue,
+    }));
+  };
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    const filteredSongs = apidata.filter(
+      (song) =>
+        song.artistName.toLowerCase().includes(query.toLowerCase()) ||
+        song.albumName.toLowerCase().includes(query.toLowerCase()) ||
+        song.songTitle.toLowerCase().includes(query.toLowerCase())
+    );
+    // window.location.reload(()=>{})
+    setFilteredData(filteredSongs);
+  };
   useEffect(() => {
     fetchData();
   }, []);
-
   return (
     <div>
       <div className="mt-3 col-12 ">
+        <div className="mb-3">
+          <input
+            type="text"
+            placeholder="Search for a song..."
+            value={searchQuery}
+            onChange={(e) => handleSearch(e.target.value)}
+          />
+        </div>
         <div id="displaySong" className="col-12 text-center getflex col-md-12">
-          {apidata &&
-            apidata.map((eachData, index) => (
+          {filteredData &&
+            filteredData.map((eachData, index) => (
               <>
                 <div class="shadow-color col-md-10 col-12 mx-auto py-4 mb-4">
                   <div class="music-container  mx-auto  py-2 text-center">
@@ -44,6 +88,7 @@ const Home = () => {
                     id={`audio-player-${index}`}
                     src={eachData.songUrl}
                     className="audio-element"
+                    onTimeUpdate={() => handleTimeUpdate(index)}
                   ></audio>
                   <div className="mt-3 ">
                     <b class="artist-name mt-5 text-center text-light">
@@ -56,57 +101,39 @@ const Home = () => {
                     <h4>
                       <b style={{ color: "#fd4414" }}>({eachData.songTitle})</b>
                     </h4>
-                  
-                  <span class="fs-5 mt-4 d-flex px-4 justify-content-between">
-                    <div class="text-light bi-heart"></div>
-                    <div class="text-light bi-card-checklist"></div>
-                    <div class="text-light bi-cloud-download"></div>
-                    <div class="text-light bi-share"></div>
-                  </span>
-                  <div class="text-center">
-                    <input
-                      type="range"
-                      class="mx-auto mt-4 w-75"
-                      value="0"
-                      id="progress-${index}"
-                    />
-                  </div>
-                  <span class="d-flex px-5 mt-3 justify-content-around">
-                    <div class="text-light bi bi-skip-backward-fill fs-1"></div>
 
-                    <div className="border col-4 rounded d-flex mx-auto">
-                      <div
-                        style={{ cursor: "pointer" }}
-                        className={`text-light bi position-relative text-center mx-auto bi-play-circle fs-1 ${
-                          playVisible ? "visible" : "invisible"
-                        }`}
-                        onClick={() => {
-                          const audio = document.getElementById(
-                            `audio-player-${index}`
-                          );
-                          audio.play();
-                          setPlayVisible(false);
-                          setPauseVisible(true);
-                        }}
-                      ></div>
-                      <div
-                        className={`text-light bi ms-2 position-absolute text-center mx-auto  bi-pause-circle fs-1 ${
-                          pauseVisible ? "visible" : "invisible"
-                        }`}
-                        onClick={() => {
-                          const audio = document.getElementById(
-                            `audio-player-${index}`
-                          );
-                          audio.pause();
-                          setPlayVisible(true);
-                          setPauseVisible(false);
-                        }}
-                      ></div>
+                    <span class="fs-5 mt-4 d-flex px-4 justify-content-between">
+                      <div class="text-light bi-heart"></div>
+                      <div class="text-light bi-card-checklist"></div>
+                      <div class="text-light bi-cloud-download"></div>
+                      <div class="text-light bi-share"></div>
+                    </span>
+                    <div class="text-center">
+                      <input
+                        type="range"
+                        class="mx-auto mt-4 w-75"
+                        value={progress[index] || 0}
+                        id={`progress-${index}`}
+                      />
                     </div>
+                    <span class="d-flex px-5 mt-3 justify-content-around">
+                      <div class="text-light bi bi-skip-backward-fill fs-1"></div>
 
-                    <div class="text-light bi bi-fast-forward-fill fs-1"></div>
-                  </span>
-                </div>
+                      <div className="col-4 rounded d-flex mx-auto">
+                        <div
+                          style={{ cursor: "pointer" }}
+                          className={`text-light bi position-relative text-center mx-auto bi-${
+                            playbackState[index] === "playing"
+                              ? "pause"
+                              : "play"
+                          }-circle fs-1  `}
+                          onClick={() => handlePlayPause(index)}
+                        ></div>
+                      </div>
+
+                      <div class="text-light bi bi-fast-forward-fill fs-1"></div>
+                    </span>
+                  </div>
                 </div>
                 {/* <div class="shadow col-12 mb-5">
                     <div class="music-container col-12 mt-5 py-4 text-center">

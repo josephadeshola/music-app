@@ -5,8 +5,8 @@ const Home = () => {
   const [apidata, setData] = useState(null);
   const [playbackState, setPlaybackState] = useState({});
   const [progress, setProgress] = useState({});
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filteredData, setFilteredData] = useState(null);
+  // const [searchQuery, setSearchQuery] = useState("");
+  // const [filteredData, setFilteredData] = useState(null);
 
   const fetchData = () => {
     let endPoint = "https://robo-music-api.onrender.com/music/my-api";
@@ -46,17 +46,17 @@ const Home = () => {
       [index]: progressValue,
     }));
   };
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-    const filteredSongs = apidata.filter(
-      (song) =>
-        song.artistName.toLowerCase().includes(query.toLowerCase()) ||
-        song.albumName.toLowerCase().includes(query.toLowerCase()) ||
-        song.songTitle.toLowerCase().includes(query.toLowerCase())
-    );
-    // window.location.reload(()=>{})
-    setFilteredData(filteredSongs);
-  };
+  // const handleSearch = (query) => {
+  //   setSearchQuery(query);
+  //   const filteredSongs = apidata.filter(
+  //     (song) =>
+  //       song.artistName.toLowerCase().includes(query.toLowerCase()) ||
+  //       song.albumName.toLowerCase().includes(query.toLowerCase()) ||
+  //       song.songTitle.toLowerCase().includes(query.toLowerCase())
+  //   );
+  //   // window.location.reload(()=>{})
+  //   setFilteredData(filteredSongs);
+  // };
   useEffect(() => {
     fetchData();
   }, []);
@@ -67,13 +67,13 @@ const Home = () => {
           <input
             type="text"
             placeholder="Search for a song..."
-            value={searchQuery}
-            onChange={(e) => handleSearch(e.target.value)}
+            // value={searchQuery}
+            // onChange={(e) => handleSearch(e.target.value)}
           />
         </div>
         <div id="displaySong" className="col-12 text-center getflex col-md-12">
-          {filteredData &&
-            filteredData.map((eachData, index) => (
+          {apidata &&
+            apidata.map((eachData, index) => (
               <>
                 <div class="shadow-color col-md-10 col-12 mx-auto py-4 mb-4">
                   <div class="music-container  mx-auto  py-2 text-center">

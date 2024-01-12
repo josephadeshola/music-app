@@ -5,8 +5,6 @@ const Home = () => {
   const [apidata, setData] = useState(null);
   const [playbackState, setPlaybackState] = useState({});
   const [progress, setProgress] = useState({});
-  // const [searchQuery, setSearchQuery] = useState("");
-  // const [filteredData, setFilteredData] = useState(null);
 
   const fetchData = () => {
     let endPoint = "https://robo-music-api.onrender.com/music/my-api";
@@ -46,33 +44,25 @@ const Home = () => {
       [index]: progressValue,
     }));
   };
-  // const handleSearch = (query) => {
-  //   setSearchQuery(query);
-  //   const filteredSongs = apidata.filter(
-  //     (song) =>
-  //       song.artistName.toLowerCase().includes(query.toLowerCase()) ||
-  //       song.albumName.toLowerCase().includes(query.toLowerCase()) ||
-  //       song.songTitle.toLowerCase().includes(query.toLowerCase())
-  //   );
-  //   // window.location.reload(()=>{})
-  //   setFilteredData(filteredSongs);
-  // };
+  const handleSeekForward = (index) => {
+    const audio = document.getElementById(`audio-player-${index}`);
+    audio.currentTime += 10;
+  };
+
+  const handleSeekBackward = (index) => {
+    const audio = document.getElementById(`audio-player-${index}`);
+    audio.currentTime -= 10;
+    playbackState[index] === "playing"?"pause":"play"
+  };
   useEffect(() => {
     fetchData();
   }, []);
   return (
     <div>
       <div className="mt-3 col-12 ">
-        {/* <div className="mb-3">
-          <input
-            type="text"
-            placeholder="Search for a song..."
-            // value={searchQuery}
-            // onChange={(e) => handleSearch(e.target.value)}
-          />
-        </div> */}
         <div id="displaySong" className="col-12 text-center getflex col-md-12">
-          {apidata && (
+          {apidata &&
+            apidata.length > 0 &&
             apidata.map((eachData, index) => (
               <>
                 <div class="shadow-color col-md-10 col-12 mx-auto py-4 mb-4">
@@ -117,7 +107,10 @@ const Home = () => {
                       />
                     </div>
                     <span class="d-flex px-5 mt-3 justify-content-around">
-                      <div class="text-light bi bi-skip-backward-fill fs-1"></div>
+                      <div
+                        class="text-light bi bi-skip-backward-fill fs-1"
+                        onClick={() => handleSeekBackward(index)}
+                      ></div>
 
                       <div className="col-4 rounded d-flex mx-auto">
                         <div
@@ -131,7 +124,10 @@ const Home = () => {
                         ></div>
                       </div>
 
-                      <div class="text-light bi bi-fast-forward-fill fs-1"></div>
+                      <div
+                        class="text-light bi bi-fast-forward-fill fs-1"
+                        onClick={() => handleSeekForward(index)}
+                      ></div>
                     </span>
                   </div>
                 </div>
@@ -247,7 +243,7 @@ const Home = () => {
                     </span>
                   </div> */}
               </>
-            )))}
+            ))}
         </div>
       </div>
     </div>

@@ -45,7 +45,7 @@ const Home = () => {
                     src={eachData.songUrl}
                     className="audio-element"
                   ></audio>
-                  <div className="mt-3">
+                  <div className="mt-3 px-5 px-md-0">
                     <b class="artist-name mt-5 text-center text-light">
                       {eachData.artistName}
                     </b>
@@ -56,7 +56,7 @@ const Home = () => {
                     <h4>
                       <b style={{ color: "#fd4414" }}>({eachData.songTitle})</b>
                     </h4>
-                  </div>
+                  
                   <span class="fs-5 mt-4 d-flex px-4 justify-content-between">
                     <div class="text-light bi-heart"></div>
                     <div class="text-light bi-card-checklist"></div>
@@ -106,6 +106,7 @@ const Home = () => {
 
                     <div class="text-light bi bi-fast-forward-fill fs-1"></div>
                   </span>
+                </div>
                 </div>
                 {/* <div class="shadow col-12 mb-5">
                     <div class="music-container col-12 mt-5 py-4 text-center">

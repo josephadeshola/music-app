@@ -59,6 +59,11 @@ body {
   /* position: relative !important; */
   /* top: 100px !important; */
 }
+.music-img {
+  height: 160px; /* Set the desired height */
+  width: 160px; /* Set the desired width */
+  object-fit: cover; /* Adjust as needed */
+}
 .same-color {
   font-size: 23px;
   color: #ed360d;

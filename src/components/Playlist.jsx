@@ -5,10 +5,13 @@ const Playlist = () => {
   const location = useLocation();
   const selectedSong = location.state?.selectedSong;
   const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+
   const handleTimeUpdate = () => {
     // Handle time update logic here
     const audio = document.getElementById("audio-player");
-    // Update progress bar or anything else
+    const progressValue = (audio.currentTime / audio.duration) * 100;
+    setProgress(progressValue);
   };
   const handlePlayPause = () => {
     const audio = document.getElementById("audio-player");
@@ -19,6 +22,15 @@ const Playlist = () => {
       audio.play();
     }
     setIsPlaying(!isPlaying);
+  };
+  const handleSeekForward = (index) => {
+    const audio = document.getElementById(`audio-player`);
+    audio.currentTime += 10;
+  };
+
+  const handleSeekBackward = (index) => {
+    const audio = document.getElementById(`audio-player`);
+    audio.currentTime -= 10;
   };
 
   return (
@@ -35,7 +47,7 @@ const Playlist = () => {
           <h4 className="text-light text-center fw-bold">
             PLAY <span style={{ color: " #ed360d" }}>-MUSIC</span>
           </h4>
-          {selectedSong &&  (
+          {selectedSong && (
             <>
               <div>
                 <img
@@ -45,11 +57,11 @@ const Playlist = () => {
                 />
               </div>
               <audio
-                    id={`audio-player`}
-                    src={selectedSong.songUrl}
-                    className="audio-element"
-                    onTimeUpdate={handleTimeUpdate}
-                  ></audio>
+                id={`audio-player`}
+                src={selectedSong.songUrl}
+                className="audio-element"
+                onTimeUpdate={handleTimeUpdate}
+              ></audio>
               <div className="mt-2">
                 <b class="artist-name mt-5 text-center text-light">
                   {selectedSong.artistName}
@@ -73,19 +85,25 @@ const Playlist = () => {
                     <input
                       type="range"
                       class="mx-auto mt-4 w-75"
-                      value="0"
-                      id="progress-${index}"
+                      value={progress}
+                      id="progress"
                     />
                   </div>
                   <span class="d-flex px-5 mt-3 justify-content-around">
-                    <div class="text-light bi bi-skip-backward-fill fs-1"
-                    
+                    <div
+                      class="text-light bi bi-skip-backward-fill fs-1"
+                      onClick={handleSeekBackward}
                     ></div>
                     <div
-                      class={`text-light bi bi-${isPlaying ? 'pause' : 'play'}-circle fs-1`}
+                      class={`text-light bi bi-${
+                        isPlaying ? "pause" : "play"
+                      }-circle fs-1`}
                       onClick={handlePlayPause}
                     ></div>
-                    <div class="text-light bi bi-fast-forward-fill fs-1"></div>
+                    <div
+                      class="text-light bi bi-fast-forward-fill fs-1"
+                      onClick={handleSeekForward}
+                    ></div>
                   </span>
                 </div>
               </div>

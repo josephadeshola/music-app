@@ -7,7 +7,7 @@ const Home = () => {
   const [progress, setProgress] = useState({});
 
   const fetchData = () => {
-    let endPoint = "https://robo-music-api.onrender.com/music/my-api";
+    let endPoint ="https://robo-music-api.onrender.com/music/my-api";
     axios
       .get(endPoint)
       .then((res) => {
@@ -21,19 +21,21 @@ const Home = () => {
 
   const handlePlayPause = (index) => {
     const audio = document.getElementById(`audio-player-${index}`);
+    const newPlaybackState = {};
+    // Pause all other audio elements
+    Object.keys(playbackState).forEach((key) => {
+      const otherAudio = document.getElementById(`audio-player-${key}`);
+      otherAudio.pause();
+      newPlaybackState[key] = "paused";
+    });
     if (playbackState[index] === "playing") {
       audio.pause();
-      setPlaybackState((prevState) => ({
-        ...prevState,
-        [index]: "paused",
-      }));
+      newPlaybackState[index] = "paused";
     } else {
       audio.play();
-      setPlaybackState((prevState) => ({
-        ...prevState,
-        [index]: "playing",
-      }));
+      newPlaybackState[index] = "playing";
     }
+    setPlaybackState(newPlaybackState);
   };
 
   const handleTimeUpdate = (index) => {
@@ -52,7 +54,6 @@ const Home = () => {
   const handleSeekBackward = (index) => {
     const audio = document.getElementById(`audio-player-${index}`);
     audio.currentTime -= 10;
-    playbackState[index] === "playing"?"pause":"play"
   };
   useEffect(() => {
     fetchData();

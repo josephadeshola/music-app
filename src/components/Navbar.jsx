@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
 import Home from "./Home";
 
@@ -148,12 +149,12 @@ const Navbar = () => {
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a
+                  <Link
                     class="nav-link bi bi-plus fw-bold px-3 fs-5 mt-3 mt-3 fs-5"
-                    href="#"
+                    to={"/playlist"}
                   >
                     Playlists
-                  </a>
+                  </Link>
                 </li>
                 <li class="nav-item">
                   <a

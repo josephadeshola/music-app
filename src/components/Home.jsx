@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./home.css";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
   const [apidata, setData] = useState(null);
   const [playbackState, setPlaybackState] = useState({});
   const [progress, setProgress] = useState({});
-
+  const navigate = useNavigate();
   const fetchData = () => {
-    let endPoint ="https://robo-music-api.onrender.com/music/my-api";
+    let endPoint = "https://robo-music-api.onrender.com/music/my-api";
     axios
       .get(endPoint)
       .then((res) => {
@@ -18,7 +19,9 @@ const Home = () => {
         console.log(err);
       });
   };
-
+  const gotoPlayList = (selectedSong) => {
+    navigate("/playlist", { state: { selectedSong } });
+  };
   const handlePlayPause = (index) => {
     const audio = document.getElementById(`audio-player-${index}`);
     const newPlaybackState = {};
@@ -69,10 +72,12 @@ const Home = () => {
                 <div class="shadow-color col-md-10 col-12 mx-auto py-4 mb-4">
                   <div class="music-container  mx-auto  py-2 text-center">
                     <img
+                      style={{ cursor: "pointer" }}
                       className="col-4"
                       src={eachData.songImage}
                       class="music-img"
                       alt=""
+                      onClick={() => gotoPlayList(eachData)}
                     />
                   </div>
                   <audio
@@ -92,7 +97,6 @@ const Home = () => {
                     <h4>
                       <b style={{ color: "#fd4414" }}>({eachData.songTitle})</b>
                     </h4>
-
                     <span class="fs-5 mt-4 d-flex px-4 justify-content-between">
                       <div class="text-light bi-heart"></div>
                       <div class="text-light bi-card-checklist"></div>
@@ -112,7 +116,6 @@ const Home = () => {
                         class="text-light bi bi-skip-backward-fill fs-1"
                         onClick={() => handleSeekBackward(index)}
                       ></div>
-
                       <div className="col-4 rounded d-flex mx-auto">
                         <div
                           style={{ cursor: "pointer" }}
@@ -132,117 +135,6 @@ const Home = () => {
                     </span>
                   </div>
                 </div>
-                {/* <div class="shadow col-12 mb-5">
-                    <div class="music-container col-12 mt-5 py-4 text-center">
-                      <img src={images1} class="music-img" alt="" />
-                    </div>
-                    <h5 class="artist-name mt-4 text-center text-light"></h5>
-                    <audio
-                      id="audio-player-${index}"
-                      src="${eachSong.audio}"
-                    ></audio>
-                    <h5 class="song-name text-center text-light fw-bold"></h5>
-                    <span class="fs-5 mt-4 d-flex px-4 justify-content-between">
-                      <div class="text-light bi-heart"></div>
-                      <div class="text-light bi-card-checklist"></div>
-                      <div class="text-light bi-cloud-download"></div>
-                      <div class="text-light bi-share"></div>
-                    </span>
-                    <div class="text-center">
-                      <input
-                        type="range"
-                        class="mx-auto mt-4 w-75"
-                        value="0"
-                        id="progress-${index}"
-                      />
-                    </div>
-                    <span class="d-flex px-5 mt-3 justify-content-around">
-                      <div class="text-light bi bi-skip-backward-fill fs-1"></div>
-                      <div
-                        class="text-light bi bi-play-circle fs-1"
-                        id="play-btn-${index}"
-                      ></div>
-                      <div
-                        class="text-light bi bi-pause-circle fs-1"
-                        id="pause-btn-${index}"
-                      ></div>
-                      <div class="text-light bi bi-fast-forward-fill fs-1"></div>
-                    </span>
-                  </div>
-                  <div class="shadow col-12 mb-5">
-                    <div class="music-container col-12 mt-5 py-4 text-center">
-                      <img src={images1} class="music-img" alt="" />
-                    </div>
-                    <h5 class="artist-name mt-4 text-center text-light"></h5>
-                    <audio
-                      id="audio-player-${index}"
-                      src="${eachSong.audio}"
-                    ></audio>
-                    <h5 class="song-name text-center text-light fw-bold"></h5>
-                    <span class="fs-5 mt-4 d-flex px-4 justify-content-between">
-                      <div class="text-light bi-heart"></div>
-                      <div class="text-light bi-card-checklist"></div>
-                      <div class="text-light bi-cloud-download"></div>
-                      <div class="text-light bi-share"></div>
-                    </span>
-                    <div class="text-center">
-                      <input
-                        type="range"
-                        class="mx-auto mt-4 w-75"
-                        value="0"
-                        id="progress-${index}"
-                      />
-                    </div>
-                    <span class="d-flex px-5 mt-3 justify-content-around">
-                      <div class="text-light bi bi-skip-backward-fill fs-1"></div>
-                      <div
-                        class="text-light bi bi-play-circle fs-1"
-                        id="play-btn-${index}"
-                      ></div>
-                      <div
-                        class="text-light bi bi-pause-circle fs-1"
-                        id="pause-btn-${index}"
-                      ></div>
-                      <div class="text-light bi bi-fast-forward-fill fs-1"></div>
-                    </span>
-                  </div>
-                  <div class="shadow col-12 mb-5">
-                    <div class="music-container col-12 mt-5 py-4 text-center">
-                      <img src={images1} class="music-img" alt="" />
-                    </div>
-                    <h5 class="artist-name mt-4 text-center text-light"></h5>
-                    <audio
-                      id="audio-player-${index}"
-                      src="${eachSong.audio}"
-                    ></audio>
-                    <h5 class="song-name text-center text-light fw-bold"></h5>
-                    <span class="fs-5 mt-4 d-flex px-4 justify-content-between">
-                      <div class="text-light bi-heart"></div>
-                      <div class="text-light bi-card-checklist"></div>
-                      <div class="text-light bi-cloud-download"></div>
-                      <div class="text-light bi-share"></div>
-                    </span>
-                    <div class="text-center">
-                      <input
-                        type="range"
-                        class="mx-auto mt-4 w-75"
-                        value="0"
-                        id="progress-${index}"
-                      />
-                    </div>
-                    <span class="d-flex px-5 mt-3 justify-content-around">
-                      <div class="text-light bi bi-skip-backward-fill fs-1"></div>
-                      <div
-                        class="text-light bi bi-play-circle fs-1"
-                        id="play-btn-${index}"
-                      ></div>
-                      <div
-                        class="text-light bi bi-pause-circle fs-1"
-                        id="pause-btn-${index}"
-                      ></div>
-                      <div class="text-light bi bi-fast-forward-fill fs-1"></div>
-                    </span>
-                  </div> */}
               </>
             ))}
         </div>

@@ -94,7 +94,7 @@ body {
   width: 50px !important;
 }
 #progress {
-  -webkit-appearance: none;
+  /* -webkit-appearance: none; */
   width: 75%;
   height: 6px;
   background: #ef9400;

@@ -18,12 +18,12 @@ const Home = () => {
       .get(endPoint)
       .then((res) => {
         setData(res.data);
-        setLoading(false); // Stop loading once data is fetched
+        setLoading(false);
         console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
-        setLoading(false); // Stop loading even if there's an error
+        setLoading(false);
       });
   };
 
@@ -34,7 +34,6 @@ const Home = () => {
   const handlePlayPause = (index) => {
     const audio = document.getElementById(`audio-player-${index}`);
     const newPlaybackState = {};
-    // Pause all other audio elements
     Object.keys(playbackState).forEach((key) => {
       const otherAudio = document.getElementById(`audio-player-${key}`);
       otherAudio.pause();
@@ -77,7 +76,7 @@ const Home = () => {
     <div>
       <div className="mt-3 col-12">
         {loading ? ( 
-          <div className="loading-spinner"><BarLoader/></div>
+          <div className="loading-spinner text-center d-flex justify-content-center  py-5 col-5 mx-auto"><BarLoader color="red"/></div>
         ) : (
           <div id="displaySong" className="col-12 text-center getflex col-md-12">
             {apidata &&
